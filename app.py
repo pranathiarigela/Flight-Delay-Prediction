@@ -15,23 +15,18 @@ except FileNotFoundError:
     st.error("Model files not found. Please run 'prediction.py' first to train and save the model.")
     st.stop()
 
-# --- Load the original data to get categorical lists for dropdowns ---
-@st.cache_data
-def load_data_for_ui():
-    df = pd.read_csv('flight_data.csv')
-    df.dropna(subset=['carrier', 'origin', 'dest'], inplace=True)
-    return df
-
-df_ui = load_data_for_ui()
+carriers = ["AA", "DL", "UA", "WN", "B6"]
+origins = ["JFK", "LAX", "ATL", "ORD", "DFW"]
+destinations = ["JFK", "LAX", "ATL", "ORD", "DFW"]
 
 # --- Sidebar for User Input ---
 st.sidebar.header('Flight Details')
 st.sidebar.markdown('Enter the flight information below to get a prediction.')
 
 # Get unique values for dropdowns
-carriers = sorted(df_ui['carrier'].unique())
-origins = sorted(df_ui['origin'].unique())
-destinations = sorted(df_ui['dest'].unique())
+carrier = st.sidebar.selectbox('Carrier', carriers)
+origin = st.sidebar.selectbox('Origin Airport', origins)
+dest = st.sidebar.selectbox('Destination Airport', destinations)
 
 # Input widgets
 dep_delay = st.sidebar.number_input('Departure Delay (minutes)', value=0, min_value=-100)
@@ -71,4 +66,5 @@ if st.sidebar.button('Predict Delay'):
     if prediction == 1:
         st.error('This flight is **predicted to be delayed** (more than 15 minutes).')
     else:
+
         st.success('This flight is **predicted to be on time**.')
