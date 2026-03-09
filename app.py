@@ -23,10 +23,6 @@ destinations = ["JFK", "LAX", "ATL", "ORD", "DFW"]
 st.sidebar.header('Flight Details')
 st.sidebar.markdown('Enter the flight information below to get a prediction.')
 
-# Get unique values for dropdowns
-carrier = st.sidebar.selectbox('Carrier', carriers)
-origin = st.sidebar.selectbox('Origin Airport', origins)
-dest = st.sidebar.selectbox('Destination Airport', destinations)
 
 # Input widgets
 dep_delay = st.sidebar.number_input('Departure Delay (minutes)', value=0, min_value=-100)
@@ -68,3 +64,4 @@ if st.sidebar.button('Predict Delay'):
     else:
 
         st.success('This flight is **predicted to be on time**.')
+
