@@ -1,0 +1,5 @@
+{
+  "carriers": ["AA", "DL", "UA"],
+  "origins": ["JFK", "LAX"],
+  "destinations": ["ORD", "ATL"]
+}
